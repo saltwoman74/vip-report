@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>부동산 거래 종합 보고서</title>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="controls hide-on-print">
+        <button class="btn btn-primary" onclick="window.print()">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+            인쇄 / PDF 저장
+        </button>
+        <div class="helper-text">항목을 클릭하여 내용을 수정할 수 있습니다.</div>
+    </div>
+
+    <!-- Page 1: Cover -->
+    <section class="page" id="page-1">
+        <div class="cover-design">
+            <div class="cover-accent"></div>
+            <div class="cover-accent-2"></div>
+        </div>
+        <div class="cover-content">
+            <div class="doc-type" contenteditable="true">REAL ESTATE TRANSACTION REPORT</div>
+            <h1 class="main-title" contenteditable="true">VIP거래 준비 보고서</h1>
+            
+            <div class="property-banner">
+                <div class="label" contenteditable="true">대상 물건</div>
+                <div class="value" contenteditable="true">창원 유니시티 4단지 401동 101호</div>
+            </div>
+
+            <div class="cover-details">
+                <div class="detail-row">
+                    <span class="detail-label" contenteditable="true">작성일자</span>
+                    <span class="detail-value" contenteditable="true">2026년 3월 10일</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label" contenteditable="true">작성자</span>
+                    <span class="detail-value" contenteditable="true">여여부동산 박혜경소장</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label" contenteditable="true">고객명</span>
+                    <span class="detail-value" contenteditable="true">VIP 고객님</span>
+                </div>
+            </div>
+
+            <div class="cover-footer">
+                <div class="agency-info" contenteditable="true" style="line-height: 1.6;">
+                    <strong>여여부동산중개사무소</strong><br>
+                    창원시 의창구 중동 유니시티3단지상가 110호<br>
+                    대표 박혜경 Tel. 010.5016.3331
+                </div>
+                <div class="logo-placeholder"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Page 2: Calculator -->
+    <section class="page" id="page-2">
+        <h2 class="page-title" contenteditable="true">아파트 매수시 필요 비용</h2>
+        
+        <table class="calc-table">
+            <tbody>
+                <tr>
+                    <th class="main-cat">매매가</th>
+                    <td class="input-cell" colspan="2">
+                        <div class="input-wrapper">
+                            <input type="text" id="price-input" value="500,000,000" class="num-input">
+                            <span class="unit">원</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="main-cat">
+                        취등록세
+                        <div class="rate-input-wrapper hide-on-print">
+                            <input type="number" id="tax-rate" value="1.1" step="0.1" class="rate-input">%
+                        </div>
+                    </th>
+                    <td class="value-cell" colspan="2">
+                        <span id="tax-amount" contenteditable="true">5,500,000</span>
+                        <span class="unit">원</span>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="main-cat" rowspan="4">부대비용</th>
+                    <td class="sub-label-cell">국민채권매입.할인</td>
+                    <td class="sub-value-cell">
+                        <div class="value-wrapper">
+                            <span class="sub-value" contenteditable="true">0</span> <span class="unit">원</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="sub-label-cell">인지대</td>
+                    <td class="sub-value-cell">
+                        <div class="value-wrapper">
+                            <span class="sub-value" id="stamp-tax" contenteditable="true">150,000</span> <span class="unit">원</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="sub-label-cell">증지대</td>
+                    <td class="sub-value-cell">
+                        <div class="value-wrapper">
+                            <span class="sub-value" contenteditable="true">15,000</span> <span class="unit">원</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="sub-label-cell">공부료</td>
+                    <td class="sub-value-cell">
+                        <div class="value-wrapper">
+                            <span class="sub-value" contenteditable="true">10,000</span> <span class="unit">원</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="main-cat">법무사비용</th>
+                    <td class="value-cell" colspan="2">
+                        <span id="legal-fee" contenteditable="true">500,000</span>
+                        <span class="unit">원</span>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="main-cat">
+                        중개보수료
+                        <div class="rate-input-wrapper hide-on-print">
+                            <input type="number" id="broker-rate" value="0.4" step="0.1" class="rate-input">%
+                        </div>
+                    </th>
+                    <td class="value-cell" colspan="2">
+                        <span id="broker-fee" contenteditable="true">2,000,000</span>
+                        <span class="unit">원</span>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="main-cat">기타추가비용</th>
+                    <td class="sub-row no-border" colspan="2">
+                        <div class="textarea-like" contenteditable="true">
+                            선수관리비, 이사비용, 인테리어비용, 입주청소외
+                        </div>
+                    </td>
+                </tr>
+                <tr class="total-row">
+                    <th class="main-cat">총 필요 자금<br><span class="helper-text-inline">(매매가 제외)</span></th>
+                    <td class="value-cell highlight" colspan="2">
+                        <span id="total-extra-cost">8,175,000</span>
+                        <span class="unit">원</span>
+                    </td>
+                </tr>
+                <tr class="total-row grand-total">
+                    <th class="main-cat" colspan="2">총 비용 합계</th>
+                    <td class="value-cell highlight">
+                        <span id="grand-total">508,175,000</span>
+                        <span class="unit">원</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="notices">
+            <p contenteditable="true">* 위 산출금액은 대략적인 예상 금액이므로, 실제 비용과 차이가 있을 수 있습니다.</p>
+            <p contenteditable="true">* 취득세는 주택 수 및 전용면적, 조정지역 여부에 따라 차등 적용됩니다.</p>
+            <p contenteditable="true">* 국민주택채권 할인율은 매일 변동되며, 위 계산은 당일 기준입니다.</p>
+            <p contenteditable="true">* 법무사 수수료는 대출액, 이동거리, 대행 서비스에 따라 변동될 수 있습니다.</p>
+        </div>
+    </section>
+
+    <!-- Page 3: Required Documents -->
+    <section class="page" id="page-3">
+        <h2 class="page-title" contenteditable="true">부동산 거래 시 필요 서류 (소유권 이전)</h2>
+        
+        <div class="doc-grid">
+            <div class="doc-card seller">
+                <h3 class="card-title">매도인 (파는 사람) 구비서류</h3>
+                <ul class="checklist">
+                    <li><div class="check-box" contenteditable="true">✓</div> <span contenteditable="true"><strong>인감도장</strong> (인감증명서와 반드시 일치할 것)</span></li>
+                    <li><div class="check-box" contenteditable="true">✓</div> <span contenteditable="true"><strong>신분증</strong> (주민등록증, 운전면허증, 여권)</span></li>
+                    <li><div class="check-box" contenteditable="true">✓</div> <span contenteditable="true"><strong>부동산 매도용 인감증명서 1통</strong><br><small>(주민센터 발급 시 '매수자 인적사항' 정확히 기재 요청)</small></span></li>
+                    <li><div class="check-box" contenteditable="true">✓</div> <span contenteditable="true"><strong>주민등록초본 1통</strong> (과거 주소이동 변동내역 전체 포함, 주민번호 전체)</span></li>
+                    <li><div class="check-box" contenteditable="true">✓</div> <span contenteditable="true"><strong>등기권리증</strong> (집문서)</span></li>
+                    <li><div class="check-box" contenteditable="true"></div> <span contenteditable="true">공동명의시 각각서류준비</span></li>
+                </ul>
+            </div>
+            
+            <div class="doc-card buyer">
+                <h3 class="card-title">매수인 (사는 사람) 구비서류</h3>
+                <ul class="checklist">
+                    <li><div class="check-box" contenteditable="true">✓</div> <span contenteditable="true"><strong>도장</strong> (막도장 가능, 대출 시 인감도장 필요)</span></li>
+                    <li><div class="check-box" contenteditable="true">✓</div> <span contenteditable="true"><strong>신분증</strong></span></li>
+                    <li><div class="check-box" contenteditable="true">✓</div> <span contenteditable="true"><strong>주민등록등본 1통</strong> (상세, 주민번호 전체 공개)</span></li>
+                    <li><div class="check-box" contenteditable="true">✓</div> <span contenteditable="true"><strong>가족관계증명서 1통</strong> (상세, 주민번호 전체 공개)</span></li>
+                    <li><div class="check-box" contenteditable="true"></div> <span contenteditable="true">공동명의시 각각 서류준비</span></li>
+                </ul>
+            </div>
+            
+            <div class="doc-card caution" style="border-top: 4px solid #f59e0b;">
+                <h3 class="card-title">준비서류시 주의사항</h3>
+                <ul class="checklist">
+                    <li><div class="check-box" contenteditable="true">✓</div> <span contenteditable="true">대금지급은 반드시 매도인 본인 명의 계좌로 입금하시기 바랍니다.</span></li>
+                    <li><div class="check-box" contenteditable="true">✓</div> <span contenteditable="true">대리인 계약시 위임장, 인감증명서(본인발급용), 대리인 신분증을 확인하시기 바랍니다.</span></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Page 3.5: Loan Range -->
+    <section class="page" id="page-loan">
+        <h2 class="page-title" contenteditable="true">대출 가능 범위</h2>
+        
+        <div class="doc-grid">
+            <div class="doc-card loan-range" style="border-top: 4px solid var(--accent-color); min-height: 500px;">
+                <div class="loan-content" contenteditable="true" style="font-size: 20px; font-weight: bold; line-height: 2; padding: 20px;">
+                    대출 가능 범위<br>
+                    <span style="font-size: 16px; font-weight: normal; color: #64748b;">(KB시세 일반평균가 기준)</span><br><br>
+                    
+                    생애최초 80%<br>
+                    무주택자 70%<br>
+                    1주택자 60%<br><br>
+                    
+                    <span style="font-size: 16px; font-weight: bold; color: #e11d48;">
+                        정부정책, DSR, LTV 기준에 따라 가능금액 변동 될 수 있음에 꼭 확인하세요
+                    </span><br><br><br>
+
+                    취득세 적용 범위(비규제 지역)<br>
+                    <span style="font-size: 18px; font-weight: normal;">
+                        1주택, 2주택 매수시 일반세율<br>
+                        3주택 매수시 8%
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Page 4: Financing Plan -->
+    <section class="page" id="page-4">
+        <h2 class="page-title" contenteditable="true">주택취득자금 조달 및 입주계획서</h2>
+        
+        <table class="finance-table">
+            <colgroup>
+                <col style="width: 15%">
+                <col style="width: 45%">
+                <col style="width: 20%">
+                <col style="width: 20%">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th colspan="2">자금 조달 항목</th>
+                    <th>금액 (원)</th>
+                    <th>세부 내역 및 비고</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 자기자금 -->
+                <tr>
+                    <td rowspan="4" class="group-header">자 기<br><br>자 금</td>
+                    <td class="sub-header" contenteditable="true">금융기관 예금액</td>
+                    <td class="value-cell"><div class="finance-input" contenteditable="true" data-type="self">0</div></td>
+                    <td><div class="finance-note" contenteditable="true"></div></td>
+                </tr>
+                <tr>
+                    <td class="sub-header" contenteditable="true">주식·채권 매각대금, 부동산 처분 등</td>
+                    <td class="value-cell"><div class="finance-input" contenteditable="true" data-type="self">0</div></td>
+                    <td><div class="finance-note" contenteditable="true"></div></td>
+                </tr>
+                <tr>
+                    <td class="sub-header" contenteditable="true">증여·상속 차입금</td>
+                    <td class="value-cell"><div class="finance-input" contenteditable="true" data-type="self">0</div></td>
+                    <td><div class="finance-note" contenteditable="true"></div></td>
+                </tr>
+                <tr>
+                    <td class="sub-header" contenteditable="true">현금 등 기타</td>
+                    <td class="value-cell"><div class="finance-input" contenteditable="true" data-type="self">0</div></td>
+                    <td><div class="finance-note" contenteditable="true"></div></td>
+                </tr>
+                <tr class="sub-total">
+                    <th colspan="2">자기자금 소계</th>
+                    <td class="value-cell highlight"><div id="finance-self-total">0</div></td>
+                    <td></td>
+                </tr>
+
+                <!-- 차입금 등 -->
+                <tr>
+                    <td rowspan="3" class="group-header">차입금<br><br>등</td>
+                    <td class="sub-header" contenteditable="true">금융회사 대출액 (주택담보대출 등)</td>
+                    <td class="value-cell"><div class="finance-input" contenteditable="true" data-type="debt">0</div></td>
+                    <td><div class="finance-note" contenteditable="true"></div></td>
+                </tr>
+                <tr>
+                    <td class="sub-header" contenteditable="true">임대보증금 (승계)</td>
+                    <td class="value-cell"><div class="finance-input" contenteditable="true" data-type="debt">0</div></td>
+                    <td><div class="finance-note" contenteditable="true"></div></td>
+                </tr>
+                <tr>
+                    <td class="sub-header" contenteditable="true">회사지원금·사채 등 기타 차입금</td>
+                    <td class="value-cell"><div class="finance-input" contenteditable="true" data-type="debt">0</div></td>
+                    <td><div class="finance-note" contenteditable="true"></div></td>
+                </tr>
+                <tr class="sub-total">
+                    <th colspan="2">차입금 등 소계</th>
+                    <td class="value-cell highlight"><div id="finance-debt-total">0</div></td>
+                    <td></td>
+                </tr>
+                
+                <tr class="total-row grand-total">
+                    <th colspan="2">합계 (매수 가격과 일치해야 함)</th>
+                    <td class="value-cell highlight"><div id="finance-grand-total" contenteditable="true">0</div></td>
+                    <td class="balance-check"><span id="balance-check" style="color: #e11d48; font-weight: bold; font-size: 16px;">500,000,000원 부족</span></td>
+                </tr>
+            </tbody>
+        </table>
+        
+    </section>
+
+    <!-- Page 5: Official Form Front -->
+    <section class="page" id="page-5" style="padding: 15mm 15mm;">
+        <div class="official-header" style="display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 5px;">
+            <div>■ 부동산 거래신고 등에 관한 법률 시행규칙 [별지 제1호의3서식] &lt;개정 2026. 2. 6.&gt;</div>
+            <div style="text-align: right;">부동산거래관리시스템(rtms.molit.go.kr)<br>에서도 신청할 수 있습니다.</div>
+        </div>
+        <h2 class="official-title" contenteditable="true" style="text-align: center; font-size: 24px; font-weight: bold; letter-spacing: 2px; margin: 15px 0;">주택취득자금 조달 및 입주계획서</h2>
+        <div class="official-subtitle" style="font-size: 12px; margin-bottom: 5px;">
+            ※ 색상이 어두운 난은 신청인이 적지 않으며, [   ]에는 해당되는 곳에 √표시를 합니다. <span style="float:right;">(앞쪽)</span>
+        </div>
+        
+        <table class="official-table">
+            <colgroup>
+                <col style="width: 15%;">
+                <col style="width: 15%;">
+                <col style="width: 35%;">
+                <col style="width: 35%;">
+            </colgroup>
+            <tbody>
+                <tr class="dark-bg">
+                    <td class="center">접수번호</td>
+                    <td class="center">접수일시</td>
+                    <td colspan="2" class="center">처리기간</td>
+                </tr>
+                <tr>
+                    <th rowspan="2" class="center" style="background:#fff; font-weight:normal;">제출인<br>(매수인)</th>
+                    <th class="center" style="background:#fff; font-weight:normal;">성명(법인명)</th>
+                    <td colspan="2"><div contenteditable="true" class="full-input"></div><span style="float:right;">주민등록번호(법인·외국인등록번호) <span contenteditable="true" style="display:inline-block; width:150px;"></span></span></td>
+                </tr>
+                <tr>
+                    <th class="center" style="background:#fff; font-weight:normal;">주소(법인소재지)</th>
+                    <td colspan="2"><div contenteditable="true" class="full-input" style="display:inline-block; width:50%;"></div><span style="float:right;">(휴대)전화번호 <span contenteditable="true" style="display:inline-block; width:120px;"></span></span></td>
+                </tr>
+                <!-- 자금 조달계획 -->
+                <tr>
+                    <td rowspan="8" class="center" style="letter-spacing: 2px;">① 자금<br>조달계획</td>
+                    <td rowspan="4" class="center" style="letter-spacing: 3px;">자기<br>자금</td>
+                    <td>
+                        <div class="flex-between"><span>② 금융기관 예금액</span><span contenteditable="true">원</span></div>
+                    </td>
+                    <td>
+                        <div class="flex-between"><span>③ 주식·채권·가상화폐 매각대금</span><span contenteditable="true">원</span></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="flex-between"><span>해외예금을 국내 송금한 경우<br>(해외 금융기관명: <span class="inline-input" contenteditable="true"></span> )</span><span contenteditable="true">원</span></div>
+                    </td>
+                    <td style="font-size: 11px;">
+                        <div class="flex-between"><span>[ ] 주식·채권 매각대금</span><span contenteditable="true">원</span></div>
+                        <div class="flex-between"><span>[ ] 가상화폐 매각대금</span><span contenteditable="true">원</span></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-size: 11px; padding: 5px;">
+                        ④ 증여·상속<br>
+                        [ ] 증여(금액: <span class="inline-input" contenteditable="true"></span> 원)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;증여세 신고 여부: [ ] 신고  [ ] 미신고<br>
+                        [ ] 상속(금액: <span class="inline-input" contenteditable="true"></span> 원)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;상속세 신고 여부: [ ] 신고  [ ] 미신고<br>
+                        <hr style="margin: 3px 0; border: 0; border-top: 1px dotted #ccc;">
+                        [ ] 부부  [ ] 직계존비속(관계: <span class="inline-input" contenteditable="true"></span>)<br>
+                        [ ] 그 밖의 관계( <span class="inline-input" contenteditable="true" style="width:100px;"></span> )
+                    </td>
+                    <td style="font-size: 11px; padding: 5px; vertical-align: top;">
+                        ⑤ 현금 등 그 밖의 자금<br>
+                        <div style="text-align: right;">원</div>
+                        [ ] 외화(금액: <span class="inline-input" contenteditable="true"></span> 원)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;외화반입 신고 여부: [ ] 신고 [ ] 미신고<br><br>
+                        <hr style="margin: 3px 0; border: 0; border-top: 1px dotted #ccc;">
+                        [ ] 보유 현금<br>
+                        [ ] 그 밖의 자산(종류: <span class="inline-input" contenteditable="true"></span> )
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-size: 12px; padding: 5px;">
+                        <div class="flex-between"><span>⑥ 부동산 처분대금 등</span><span>원</span></div>
+                        [ ] 주택·토지 <span style="float:right;">원</span><br>
+                        [ ] 임대보증금(취득주택 외) <span style="float:right;">원</span><br>
+                        [ ] 기타(종류: <span class="inline-input" contenteditable="true"></span> ) <span style="float:right;">원</span>
+                    </td>
+                    <td>
+                        <div class="flex-between" style="font-weight:bold;"><span>⑦ 소계</span><span contenteditable="true">원</span></div>
+                    </td>
+                </tr>
+                <!-- 차입금 등 -->
+                <tr>
+                    <td rowspan="4" class="center">차입금<br>등</td>
+                    <td style="padding:0; border:none; border-bottom:1px solid var(--border-color);">
+                        <table style="width:100%; margin:0; border:none;">
+                            <tr><td colspan="3" style="border:none; border-bottom:1px solid var(--border-color);">⑧ 금융기관 대출액 합계</td></tr>
+                            <tr><td rowspan="4" style="border:none; border-right:1px solid var(--border-color); text-align:right; vertical-align:bottom;" contenteditable="true">원</td><td style="border:none; font-size:11px;">주택담보대출</td><td style="border:none; font-size:11px;">(금융기관명: ) &nbsp;&nbsp;&nbsp;&nbsp;원</td></tr>
+                            <tr><td style="border:none; font-size:11px;">신용대출</td><td style="border:none; font-size:11px;">(금융기관명: ) &nbsp;&nbsp;&nbsp;&nbsp;원</td></tr>
+                            <tr><td style="border:none; font-size:11px;">사업자대출</td><td style="border:none; font-size:11px;">(금융기관명: ) &nbsp;&nbsp;&nbsp;&nbsp;원</td></tr>
+                            <tr><td style="border:none; font-size:11px; border-bottom:1px solid var(--border-color);">해외 금융기관 대출<br>그 밖의 대출</td><td style="border:none; font-size:11px; border-bottom:1px solid var(--border-color);">(금융기관명: ) &nbsp;&nbsp;&nbsp;&nbsp;원<br>(대출 종류: ) &nbsp;&nbsp;&nbsp;&nbsp;원</td></tr>
+                        </table>
+                    </td>
+                    <td style="font-size: 12px;">
+                        기존 주택 보유 여부 (주택담보대출이 있는 경우만 기재)<br>
+                        <br>
+                        [ ] 미보유  [ ] 보유 ( <span contenteditable="true" class="inline-input" style="width:20px;"></span> 건)
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-size: 11px;">
+                        <div class="flex-between"><span>⑨ 취득주택의 임대보증금</span><span contenteditable="true">원</span></div>
+                    </td>
+                    <td style="font-size: 11px;">
+                        ⑩ 회사지원금·사채<br>
+                        [ ] 회사지원금 <span style="float:right;">원</span><br>
+                        [ ] 사채 <span style="float:right;">원</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-size: 11px;">
+                        <div class="flex-between"><span>⑪ 그 밖의 차입금</span><span contenteditable="true">원</span></div>
+                        <hr style="margin: 3px 0; border: 0; border-top: 1px dotted #ccc;">
+                        [ ] 부부  [ ] 직계존비속(관계: <span class="inline-input" contenteditable="true"></span>)<br>
+                        [ ] 그 밖의 관계 ( <span class="inline-input" contenteditable="true" style="width:80px;"></span> )
+                    </td>
+                    <td style="vertical-align:bottom;">
+                        <div class="flex-between" style="font-weight:bold;"><span>⑫ 소계</span><span contenteditable="true">원</span></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><div class="flex-between" style="font-weight:bold;"><span>⑬ 합계</span><span contenteditable="true">원</span></div></td>
+                </tr>
+                <!-- 조달자금 지급방식 -->
+                <tr>
+                    <td class="center">⑭ 조달자금<br>지급방식</td>
+                    <td colspan="3" style="padding:0;">
+                        <table style="width:100%; margin:0; border:none; font-size:12px;">
+                            <tr><td style="border:none; border-bottom:1px solid var(--border-color); width: 40%; font-weight:bold;">총 거래금액</td><td style="border:none; border-bottom:1px solid var(--border-color); border-left:1px solid var(--border-color); text-align:right;" contenteditable="true">원</td></tr>
+                            <tr><td style="border:none; border-bottom:1px solid var(--border-color);">⑮ 계좌이체 금액</td><td style="border:none; border-bottom:1px solid var(--border-color); border-left:1px solid var(--border-color); text-align:right;" contenteditable="true">원</td></tr>
+                            <tr><td style="border:none; border-bottom:1px solid var(--border-color);">⑯ 보증금·대출 승계 금액</td><td style="border:none; border-bottom:1px solid var(--border-color); border-left:1px solid var(--border-color); text-align:right;" contenteditable="true">원</td></tr>
+                            <tr><td style="border:none; border-bottom:1px solid var(--border-color);">⑰ 현금 및 그 밖의 지급방식 금액</td><td style="border:none; border-bottom:1px solid var(--border-color); border-left:1px solid var(--border-color); text-align:right;" contenteditable="true">원</td></tr>
+                            <tr><td style="border:none;">지급 사유 ( <span contenteditable="true" style="display:inline-block; width:60%;"></span> )</td><td style="border:none; border-left:1px solid var(--border-color); text-align:right;" contenteditable="true">)</td></tr>
+                        </table>
+                    </td>
+                </tr>
+                <!-- 입주 계획 -->
+                <tr>
+                    <td class="center">⑱ 입주 계획</td>
+                    <td colspan="3" style="font-size: 12px; padding: 10px;">
+                        <div style="display:flex; justify-content: space-around; text-align:center;">
+                            <div>[ ] 본인입주 &nbsp;&nbsp;&nbsp; [ ] 본인 외 가족입주<br>(입주 예정 시기: <span class="inline-input" contenteditable="true" style="width:30px;"></span> 년 <span class="inline-input" contenteditable="true" style="width:20px;"></span> 월)</div>
+                            <div>[ ] 임대<br>(전·월세)</div>
+                            <div>[ ] 그 밖의 경우<br>(재건축 등)</div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="official-footer" style="font-size: 11px; margin-top: 15px; line-height: 1.5;">
+            「부동산 거래신고 등에 관한 법률 시행령」 별표1 제2호나목, 같은 표 제3호가목 전단, 같은 호 나목, 같은 표 제3호의2가목 전단, 같은 호 나목 및 같은 법 시행규칙 제2조제6항·제7항·제9항·제10항에 따라 위와 같이 주택취득자금 조달 및 입주계획서를 제출합니다.<br>
+            <div style="text-align: right; margin-top: 20px;">
+                <span contenteditable="true" style="margin-right: 30px;">년 &nbsp;&nbsp;&nbsp;월 &nbsp;&nbsp;&nbsp;일</span><br>
+                <div style="margin-top: 10px;">제출인 <span class="inline-input" style="width: 150px; display:inline-block; margin-left:10px;"></span> (서명 또는 인)</div>
+            </div>
+            <div style="font-size: 20px; font-weight: bold; margin-top: 10px;">시장·군수·구청장 <span style="font-size: 14px; font-weight: normal;">귀하</span></div>
+        </div>
+        <div style="text-align: right; font-size: 10px; margin-top: auto; color: #666;">
+            210mm×297mm[백상지(80g/㎡) 또는 중질지(80g/㎡)]
+        </div>
+    </section>
+
+    <!-- Page 6: Official Form Back -->
+    <section class="page" id="page-6" style="padding: 15mm 15mm;">
+        <div style="text-align: right; font-size: 11px; margin-bottom: 5px;">(뒤쪽)</div>
+        <table class="official-table" style="margin-bottom: 0;">
+            <tbody>
+                <tr>
+                    <td class="center" style="background-color: var(--table-header); color: #000; font-weight:bold;">유의사항</td>
+                </tr>
+                <tr>
+                    <td style="font-size: 10.5px; line-height: 1.5; padding: 15px;">
+                        1. 제출하신 주택취득자금 조달 및 입주계획서는 국세청 등 관계기관에 통보되어, 신고내역 조사 및 관련 세법에 따른 조사 시 참고자료로 활용됩니다.<br>
+                        2. 주택취득자금 조달 및 입주계획서(첨부서류 제출대상인 경우 첨부서류를 포함합니다)를 계약체결일부터 30일 이내에 제출하지 않거나 거짓으로 작성하는 경우 「부동산 거래신고 등에 관한 법률」 제28조제2항 또는 제3항에 따라 과태료가 부과되오니 유의하시기 바랍니다.<br>
+                        3. 이 서식은 부동산거래계약 신고서 접수 전에는 제출이 불가하오니 별도 제출하는 경우에는 미리 부동산거래계약 신고서의 제출여부를 신고서 제출자 또는 신고관청에 확인하시기 바랍니다.
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 0;">
+                        <table style="width: 100%; border: none; margin: 0;">
+                            <tr>
+                                <th style="border: none; border-right: 1px solid var(--border-color); width: 14%; font-weight: normal; font-size: 11px;" class="center">첨부서류</th>
+                                <td style="border: none; font-size: 10.5px; line-height: 1.5; padding: 10px; text-align: justify;">
+                                    투기과열지구에 소재하는 주택의 거래계약을 체결한 경우나 「부동산 거래신고 등에 관한 법률」 제11조제1항에 따른 허가 및 변경허가를 받아 같은 법 제10조에 따른 토지거래허가구역에 소재하는 주택의 거래계약을 체결하는 경우에는 다음 각 호의 구분에 따른 서류를 첨부해야 합니다. 이 경우 주택취득자금 조달 및 입주계획서의 제출일을 기준으로 주택취득에 필요한 자금의 대출이 실행되지 않았거나 본인 소유 부동산의 매매계약이 체결되지 않은 경우 등 항목별 금액 증명이 어려운 경우에는 그 사유서를 첨부해야 합니다.<br>
+                                    1. 금융기관 예금액 항목을 적은 경우: 예금잔액증명서 등 예금 금액을 증명할 수 있는 서류<br>
+                                    2. 주식·채권 매각대금 항목을 적은 경우: 주식거래내역서 또는 예금잔액증명서 등 주식·채권 매각 금액을 증명할 수 있는 서류<br>
+                                    3. 증여·상속 항목을 적은 경우: 증여세·상속세 신고서 또는 납세증명서 등 증여 또는 상속받은 금액을 증명할 수 있는 서류<br>
+                                    4. 현금 등 그 밖의 자금 항목을 적은 경우: 다음 각 목의 서류<br>
+                                    &nbsp;&nbsp;&nbsp;가. 소득금액증명원 또는 근로소득 원천징수영수증 등 소득을 증명할 수 있는 서류<br>
+                                    &nbsp;&nbsp;&nbsp;나. 외국환신고(확인)필증 또는 지급수단등의 수출입(변경)신고서 등 외국환의 반입을 증명할 수 있는 서류(외국환의 반입을 신고한 경우만 해당합니다)<br>
+                                    5. 부동산 처분대금 등 항목을 적은 경우: 부동산 매매계약서 또는 부동산 임대차계약서 등 부동산 처분 등에 따른 금액을 증명할 수 있는 서류<br>
+                                    6. 금융기관 대출액 합계 항목을 적은 경우: 금융거래확인서, 부채증명서 또는 금융기관 대출신청서 등 금융기관으로부터 대출받은 금액을 증명할 수 있는 서류<br>
+                                    7. 임대보증금 항목을 적은 경우: 부동산 임대차계약서<br>
+                                    8. 회사지원금·사채 또는 그 밖의 차입금 항목을 적은 경우: 금전을 빌린 사실과 그 금액을 확인할 수 있는 서류
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="center" style="background-color: var(--table-header); color: #000; font-weight:bold;">작성방법</td>
+                </tr>
+                <tr>
+                    <td style="font-size: 10.5px; line-height: 1.5; padding: 10px 15px; text-align: justify;">
+                        1. ①  "자금조달계획" 에는 해당 주택의 취득에 필요한 자금의 조달계획(부동산 거래신고를 하기 전에 부동산 거래대금이 모두 지급된 경우에는 조달방법)을 적고, 매수인이 다수인 경우 각 매수인별로 작성해야 하며, 각 매수인별 금액을 합산한 총 금액과 거래신고된 주택거래금액이 일치해야 합니다.<br>
+                        2. ② ~ ⑥에는 자기자금을 종류별로 구분하여 중복되지 않게 적습니다.<br>
+                        3. ②  "금융기관 예금액" 에는 금융기관에 예치되어 있는 본인명의의 예금(적금 등)을 통해 조달하려는 자금을 적습니다. 해외 금융기관에서 국내 금융기관으로 자금을 이체한 경우에는 송금한 해외 금융기관명 및 자금도 적습니다.<br>
+                        4. ③  "주식·채권·가상화폐 매각대금" 에는 본인 명의 주식·채권 및 각종 유가증권 매각 등을 통해 조달하려는 자금을 적습니다.<br>
+                        5. ④  "증여·상속" 에는 가족 등으로부터 증여 받거나 상속받아 조달하는 자금 및 증여세, 상속세 신고 여부와 금액을 적고, 자금을 제공한 자와의 관계를 해당 난에 √표시를 하며, 부부 외의 경우 해당 관계를 적습니다.<br>
+                        6. ⑤  "현금 등 그 밖의 자금" 에는 현금으로 보유하고 있는 자금 및 자기자금 중 다른 항목에 포함되지 않는 그 밖의 본인 자산을 통해 조달하려는 자금(금융기관 예금액 외의 각종 금융상품 및 간접투자상품을 통해 조달하려는 자금 포함)을 적고, 해당 자금이 보유하고 있는 현금일 경우  "보유 현금 "에 √표시를 하고, 현금이 아닌 경우  "그 밖의 자산 "에 √표시를 하고 자산의 종류를 적습니다.<br>
+                        7. ⑥  "부동산 처분대금 등" 에는 본인 소유 부동산의 매도, 기존 임대보증금 회수 등을 통해 조달하려는 자금 또는 재건축, 재개발시 발생한 종전 부동산 권리가액 등을 적습니다.<br>
+                        8. ⑦  "소계" 에는  ② ~ ⑥의 합계액을 적습니다.<br>
+                        9. ⑧ ~ ⑪에는 자기자금을 제외한 차입금 등을 종류별로 구분하여 중복되지 않게 적습니다.<br>
+                        10. ⑧  "금융기관 대출액 합계" 에는 금융기관으로부터 대출을 통해 조달하려는 자금 또는 매도인의 대출금 승계 자금을 적고, 주택담보대출·신용대출·사업자대출·해외 금융기관 대출인 경우 각 해당 난에 대출액과 금융기관명을 적으며, 그 밖의 대출인 경우 대출액 및 대출 종류를 적습니다. 또한 주택담보 대출액이 있는 경우  "기존 주택 보유 여부" 의 해당 난에 √표시를 합니다. 이 경우 기존 주택은 신고하려는 거래계약 대상인 주택은 제외하고, 주택을 취득할 수 있는 권리와 주택을 지분으로 보유하고 있는 경우는 포함하며, "기존 주택 보유 여부"  중  "보유" 에 √표시를 한 경우에는 기존 주택 보유 수(지분으로 보유하고 있는 경우에는 각 건별로 계산합니다)를 적습니다.<br>
+                        11. ⑨  "임대보증금" 에는 취득 주택의 신규 임대차 계약 또는 매도인으로부터 승계한 임대차 계약의 임대보증금 등 임대를 통해 조달하려는 자금을 적습니다.<br>
+                        12. ⑩  "회사지원금·사채" 에는 금융기관 외의 법인, 개인사업자로부터 차입을 통해 조달하려는 자금을 적습니다.<br>
+                        13. ⑪  "그 밖의 차입금" 에는 ⑧ ~ ⑩에 포함되지 않는 차입금 등을 적고, 자금을 제공한 자와의 관계를 해당 난에 √표시를 하고 부부 외의 경우 해당 관계를 적습니다.<br>
+                        14. ⑫에는 ⑧ ~ ⑪의 합계액을, ⑬에는 ⑦과 ⑫의 합계액을 적습니다.<br>
+                        15. ⑭  "조달자금 지급방식" 에는 조달한 자금을 매도인에게 지급하는 방식 등을 각 항목별로 적습니다.<br>
+                        16. ⑮  "계좌이체 금액" 에는 금융기관 계좌이체로 지급했거나 지급 예정인 금액 등 금융기관을 통해서 자금지급 확인이 가능한 금액을 적습니다.<br>
+                        17. ⑯  "보증금·대출 승계 금액" 에는 종전 임대차계약 보증금 또는 대출금 승계 등 매도인으로부터 승계했거나 승계 예정인 자금의 금액을 적습니다.<br>
+                        18. ⑰  "현금 및 그 밖의 지급방식 금액" 에는 ⑮, ⑯ 외의 방식으로 지급했거나 지급 예정인 금액을 적고 계좌이체가 아닌 현금(수표) 등의 방식으로 지급하는 구체적인 사유를 적습니다.<br>
+                        19. ⑱  "입주 계획" 에는 해당 주택의 거래계약을 체결한 이후 첫 번째 입주자 기준(다세대, 다가구 등 2세대 이상인 경우에는 해당 항목별 중복하여 적습니다)으로 적으며,  "본인입주" 란 매수자 및 주민등록상 동일 세대원이 함께 입주하는 경우를,  "본인 외 가족입주" 란 매수자와 주민등록상 세대가 분리된 가족이 입주하는 경우를 말하며, 이 경우에는 입주 예정 시기 연월을 적습니다. 또한 재건축 추진 또는 멸실 후 신축 등 해당 주택에 입주 또는 임대하지 않는 경우 등에는  "그 밖의 경우" 에 √표시를 합니다.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
